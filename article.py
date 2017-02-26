@@ -37,6 +37,10 @@ class image:
             print(url)
         except http.client.RemoteDisconnected:
             pass
+        except ValueError:
+            pass
+        except:
+            pass
         os.chdir('../../..')
         return
     
