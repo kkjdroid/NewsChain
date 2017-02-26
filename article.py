@@ -25,6 +25,7 @@ class image:
     def download_image(self, url):
         import urllib.request
         import os
+        import http
         os.chdir('static/images')
         if not os.path.exists(self.article):
             os.makedirs(self.article)
