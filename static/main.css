@@ -44,7 +44,7 @@ ul#headlines > li
     background-color: #ccc
 }
 
-ul#headlines > li > div
+ul#headlines > li > a > div
 {
     width: 33%;
     height: 15vh;

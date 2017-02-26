@@ -18,9 +18,11 @@
         <ul id="headlines">
         {% for _ in lines %}
             <li>
+                <a href="./articles/{{_.guid}}">
                 <div style="background-image: url(./static/images/{{ _.guid }}/image00000000)">
                 </div>
-                <a href="./articles/{{_.guid}}">{{ _.headline }}</a>
+                {{ _.headline }}
+                </a>
             </li>
         {% endfor %}
         </ul>
