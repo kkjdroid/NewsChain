@@ -3,7 +3,7 @@
 <head>
     <title>Malchior VII's Premier News Organization</title>
     <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css" />
-    <link rel="stylesheet" href="static/main.css" />
+    <link rel="stylesheet" href="../static/article.css" />
 </head>
 <body>
     <header>
@@ -14,13 +14,17 @@
             <a href="refresh">Add an article</a>
         </div>
     </header>
+    
     <div id="content">
-        <ul id="headlines">
-        {% for _ in lines %}
+    <h1>
+        {{article.headline}}
+    </h1>
+        <ul id="images">
+        {% for _ in article.images %}
             <li>
-                <div style="background-image: url(./static/images/{{ _.guid }}/image00000000)">
-                </div>
-                <a href="./articles/{{_.guid}}">{{ _.headline }}</a>
+                <img src="../{{_[0]}}" />
+                <br />
+                {{_[1]}}
             </li>
         {% endfor %}
         </ul>

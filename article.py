@@ -29,14 +29,13 @@ class image:
         if not os.path.exists(self.article):
             os.makedirs(self.article)
         os.chdir(self.article)
-        self.filename = 'image{:08d}.format(len(os.listdir()))'
+        self.filename = 'image{:08d}'.format(len(os.listdir()))
         try:
             urllib.request.urlretrieve(url, self.filename)
         except urllib.error.HTTPError:
             print(url)
         except http.client.RemoteDisconnected:
             pass
-        print(self.filename)
         os.chdir('../../..')
         return
     

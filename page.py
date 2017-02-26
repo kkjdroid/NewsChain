@@ -35,7 +35,7 @@ def refresh():
     return redirect('/', code = 303)
 
 @app.route('/articles/<guid>')
-def articles():
+def articles(guid):
     try:
         with open('articles.json') as f:
             articles = [article(_) for _ in json.load(f)]
@@ -46,3 +46,6 @@ def articles():
         return redirect('refresh', code = 303)
     return redirect('/', code = 303)
     
+if __name__ == '__main__':
+    app.debug = True
+    app.run()

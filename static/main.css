@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'comic-neue';
+    src: url(comic-neue.ttf);
+}
+
+a, a:hover, a:visited
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+header
+{
+    min-width: 100vw;
+    height: 20vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+div#content
+{
+    margin-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 90vw;
+    white-space:nowrap;
+    overflow-y: scroll;
+    overflow-x: visible;
+    display: table;
+    list-style-type:none;
+}
+
+ul#headlines > li
+{
+    width: 75em;
+    max-width: 80vw;
+    margin-top: 1ex;
+    line-height: 15vh;
+    max-height: 15vh;
+    overflow-y: hidden;
+    background-color: #ccc
+}
+
+ul#headlines > li > div
+{
+    width: 33%;
+    height: 15vh;
+    vertical-align: middle;
+    background-position: 50% 50%;
+    display: inline-block;
+    background-size: 100%
+}
+
+div#header-top, div#header-bottom
+{
+    height: 10vh;
+    width: 100vw;
+    line-height: 10vh;
+    font-family: comic-neue;
+}
+
+div#header-top
+{
+    color: #4ae;
+    font-size: 8vh;
+    background-color: white;
+}
+
+div#header-bottom
+{
+    background-color: #ccc;
+}
+
+div#header-top > a, div#header-bottom > a
+{
+    margin-left: 5vw;
+}
+
+div#header-bottom > a
+{
+    //border: 1px solid white;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #666;
+    color: #ccc;
+    font-size: 3vh;
+}

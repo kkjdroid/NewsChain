@@ -36,7 +36,6 @@ def sample_to_file(sample, f = 'sample.txt'):
 
 def sample_from_file(f = 'sample.txt'):
     import os
-    print(os.getcwd())
     workfile = open(f)
     sample = workfile.readlines()
     return sample
