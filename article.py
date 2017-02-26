@@ -12,7 +12,7 @@ class article:
         self.images = []
         for _ in image_urls:
             img = image(_, self.guid)
-            self.images.append((f'./static/images/{self.guid}/{img.filename}', img.caption))
+            self.images.append(('./static/images/{}/{}'.format(self.guid,img.filename), img.caption))
         return
 
 class image:
@@ -29,7 +29,7 @@ class image:
         if not os.path.exists(self.article):
             os.makedirs(self.article)
         os.chdir(self.article)
-        self.filename = f'image{len(os.listdir()):08d}'
+        self.filename = 'image{:08d}.format(len(os.listdir()))'
         try:
             urllib.request.urlretrieve(url, self.filename)
         except urllib.error.HTTPError:
@@ -50,7 +50,7 @@ class image:
         display = Display(visible=0, size=(800,600))
         display.start()
         browser = webdriver.Chrome()
-        query = f'https://www.google.com/searchbyimage?image_url={urllib.parse.quote(url, safe="")}'
+        query = 'https://www.google.com/searchbyimage?image_url={}'.format(urllib.parse.quote(url, safe=""))
         print(query)
         browser.get(query)
         time.sleep(1)
@@ -68,7 +68,7 @@ class image:
         from selenium import webdriver
         from pyvirtualdisplay import Display
         line = urllib.parse.quote_plus(line)
-        query = f'http:/www.google.com/search?tbm=isch&tbs=sur:fmc&*&q={line}'
+        query = 'http:/www.google.com/search?tbm=isch&tbs=sur:fmc&*&q={}'.format(line)
         display = Display(visible=0, size=(800,600))
         display.start()
         browser = webdriver.Chrome()
