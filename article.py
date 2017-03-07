@@ -13,7 +13,7 @@ class article:
         for _ in image_urls:
             img = image(_, self.guid)
             self.images.append(('./static/images/{}/{}'.format(self.guid,img.filename), img.caption))
-        return
+        return self
 
 class image:
     def __init__(self, url, guid):
@@ -45,27 +45,6 @@ class image:
         return
     
     @staticmethod
-    def get_caption(url):
-        import time
-        import urllib
-        from selenium import webdriver
-        import selenium
-        from pyvirtualdisplay import Display
-        display = Display(visible=0, size=(800,600))
-        display.start()
-        browser = webdriver.Chrome()
-        query = 'https://www.google.com/searchbyimage?image_url={}'.format(urllib.parse.quote(url, safe=""))
-        print(query)
-        browser.get(query)
-        time.sleep(1)
-        caption = ''
-        try:
-            caption = browser.find_element_by_class_name('_gUb').text
-        except selenium.common.exceptions.NoSuchElementException:
-            print('None')
-        return caption
-            
-    @staticmethod
     def get_image_urls(line, limit = 10):
         import time
         import urllib
@@ -81,3 +60,35 @@ class image:
         elems = [_.get_attribute('href') for _ in browser.find_elements_by_class_name('rg_l')]
         #_ = urllib.parse.unquote_plus(_)
         return list(set([urllib.parse.unquote(_[_.index('=') + 1:_.index('&')]) for _ in elems]))[:limit]
+    
+    @staticmethod
+    def get_caption(url = 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg'):
+        import urllib.request
+        import http
+        from bs4 import BeautifulSoup
+        query = 'https://www.google.com/searchbyimage?image_url={}'.format(urllib.parse.quote(url, safe=''))
+        headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20120101 Firefox/33.0' }
+        req = urllib.request.Request(query, None, headers)
+        with urllib.request.urlopen(req) as response:
+            bs = BeautifulSoup(response.read(), 'html.parser')
+            try:
+                return bs.find_all('a', {'class': '_gUb'})[0].get_text(' ', strip = True)
+            except IndexError:
+                return ''
+       
+    """@staticmethod
+    def get_image_urls(line, limit = 5):
+        import urllib.request
+        from bs4 import BeautifulSoup
+        query = 'http://www.google.com/search?tbm=isch&tbs=sur:fmc&*&q={}'.format(urllib.parse.quote_plus(line, safe='')) 
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20120101 Firefox/33.0'}
+        req = urllib.request.Request(query, None, headers)
+        elems = []
+        unquoted = []
+        with urllib.request.urlopen(req) as response:
+            bs = BeautifulSoup(response.read(), 'html.parser')
+            elems = bs.find_all('a', {'class': 'rg_l'})
+            for _ in elems:
+                print(_)
+                unquoted.append(urllib.parse.unquote_plus(_.get('href')))
+        return unquoted"""
