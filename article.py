@@ -13,7 +13,7 @@ class article:
         for _ in image_urls:
             img = image(_, self.guid)
             self.images.append(('./static/images/{}/{}'.format(self.guid,img.filename), img.caption))
-        return self
+        return None
 
 class image:
     def __init__(self, url, guid):
@@ -26,10 +26,10 @@ class image:
         import urllib.request
         import os
         import http
-        os.chdir('static/images')
-        if not os.path.exists(self.article):
-            os.makedirs(self.article)
-        os.chdir(self.article)
+        path = os.getcwd()
+        directory = 'static/images/{}'.format(self.article)
+        os.makedirs(directory, exist_ok=True)
+        os.chdir(directory)
         self.filename = 'image{:08d}'.format(len(os.listdir()))
         try:
             urllib.request.urlretrieve(url, self.filename)
@@ -41,7 +41,7 @@ class image:
             pass
         except:
             pass
-        os.chdir('../../..')
+        os.chdir(path)
         return
     
     @staticmethod
@@ -58,8 +58,8 @@ class image:
         browser.get(query)
         time.sleep(1)
         elems = [_.get_attribute('href') for _ in browser.find_elements_by_class_name('rg_l')]
-        #_ = urllib.parse.unquote_plus(_)
-        return list(set([urllib.parse.unquote(_[_.index('=') + 1:_.index('&')]) for _ in elems]))[:limit]
+        elems = list(set(elems))[:limit]
+        return list(map(image.get_image_from_link, elems))
     
     @staticmethod
     def get_caption(url = 'https://static.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg'):
@@ -92,3 +92,15 @@ class image:
                 print(_)
                 unquoted.append(urllib.parse.unquote_plus(_.get('href')))
         return unquoted"""
+
+    @staticmethod
+    def get_image_from_link(s):
+        import urllib
+        url = urllib.parse.urlparse(s)
+        query = url.query
+        qs = urllib.parse.parse_qs(query)
+        imgurls = qs.get('imgurl')
+        imgurl = next(iter(imgurls), None)
+        unquoted = urllib.parse.unquote_plus(imgurl)
+        return unquoted
+        

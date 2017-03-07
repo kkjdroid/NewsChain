@@ -1,6 +1,7 @@
 def markov():
     import markovify
-    from get_lines import sample_from_file, remove_emoji as remove_emoji
+    from sample import sample_from_file
+    from scrape import remove_emoji
     sample = filter_headlines(sample_from_file())['headlines']
     #markov_lines = remove_emoji('\n'.join(sample))
     markov_lines = '\n'.join(sample)

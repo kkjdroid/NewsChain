@@ -1,7 +1,7 @@
 def sample_to_file(sample, f = 'sample.txt'):
     with open(f, 'w') as workfile:
         for l in sample:
-        workfile.write('{}\n'.format(l))
+            workfile.write('{}\n'.format(l))
 
 def sample_from_file(f = 'sample.txt'):
     with open(f) as workfile:
