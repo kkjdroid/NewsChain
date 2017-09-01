@@ -1,5 +1,5 @@
 from markov import markov
-from datetime import datetime
+from uuid import uuid4
 import hashlib
 class article:
     def __init__(self, d = None):
@@ -8,7 +8,7 @@ class article:
             return
         self.headline = markov()
         image_urls = image.get_image_urls(self.headline)
-        self.guid = hashlib.md5(repr(datetime.now()).encode('utf-8')).hexdigest()
+        self.guid = uuid4().hex
         self.images = []
         for _ in image_urls:
             img = image(_, self.guid)
@@ -78,6 +78,6 @@ class image:
         browser = webdriver.Chrome()
         browser.get(query)
         time.sleep(1)
-        elems = [_.get_attribute('href') for _ in browser.find_elements_by_class_name('rg_l')]
+        elems = [_.get_attribute('href') for _ in browser.find_elements_by_class_name('rg_l')] # TODO: get link to page as well as direct link
         #_ = urllib.parse.unquote_plus(_)
         return list(set([urllib.parse.unquote(_[_.index('=') + 1:_.index('&')]) for _ in elems]))[:limit]

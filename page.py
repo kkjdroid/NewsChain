@@ -17,7 +17,6 @@ def index(*args):
                 return redirect('refresh', code = 303)
     except FileNotFoundError:
         return redirect('refresh', code = 303)
-    print(articles)
     return render_template('main.html', lines = articles)
 
 @app.route('/refresh/')

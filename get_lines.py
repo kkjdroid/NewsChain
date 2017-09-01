@@ -30,14 +30,14 @@ def remove_emoji(line):
     return emoji.sub('', line).strip()
 
 def sample_to_file(sample, f = 'sample.txt'):
-    workfile = open(f, 'w')
-    for l in sample:
-        workfile.write(f'{l}\n')
+    with open(f, 'w') as workfile:
+        for l in sample:
+            workfile.write(f'{l}\n')
 
 def sample_from_file(f = 'sample.txt'):
     import os
-    workfile = open(f)
-    sample = workfile.readlines()
+    with open(f) as workfile: 
+        sample = workfile.readlines()
     return sample
     
 """def find_object(line):
