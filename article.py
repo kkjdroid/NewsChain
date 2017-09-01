@@ -106,5 +106,3 @@ class image:
         imgurl = next(iter(imgurls), None)
         unquoted = urllib.parse.unquote_plus(imgurl)
         return unquoted
-        
->>>>>>> 5c82f85c38a8a6df958747f2a577d96856fa92e1
