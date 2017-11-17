@@ -28,7 +28,6 @@ def remove_emoji(line):
     emoji = re.compile('[\U00010000-\U0010ffff]')
     "credit to Martijn Pieters at https://stackoverflow.com/a/12636588"
     return emoji.sub('', line).strip()
-<<<<<<< HEAD:get_lines.py
 
 def sample_to_file(sample, f = 'sample.txt'):
     with open(f, 'w') as workfile:
@@ -49,5 +48,3 @@ def sample_from_file(f = 'sample.txt'):
     sub_toks = [tok for tok in doc if (tok.dep_ == "nsubj") ]
 
     return sub_toks or list(doc.noun_chunks)[0]"""
-=======
->>>>>>> 5c82f85c38a8a6df958747f2a577d96856fa92e1:scrape.py
